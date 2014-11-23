@@ -1,39 +1,36 @@
 "use strict";
 (function () {
 
-    angular.module("minimalg", ["ui.router",
-        "ui.bootstrap",
-        'restangular',
+    angular.module("minimalg", [
+//        "ui.bootstrap",
         'mg.places',
-        'mg.faces',
         'mg.templates',
-        'mg.common'
+        'mg.common',
+        "btford.socket-io",
+        "ngMaterial"
     ])
 
-        .config(function ($stateProvider, $urlRouterProvider, $sceProvider, RestangularProvider) {
-            RestangularProvider.setBaseUrl('/api/v1');
-
-            $urlRouterProvider.otherwise("/main/places");
-            $stateProvider
-                .state("main", {
-                    abtract: true,
-                    url: "/main",
-                    templateUrl: "app/main.html",
-                    controller: 'MainCtrl'
-                })
-                .state("main.places", {
-                    url: "/places",
-                    templateUrl: "app/places/places.tpl.html",
-                    controller: 'PlacesCtrl'})
-                .state("main.faces", {
-                    url: "/faces",
-                    templateUrl: "app/faces/faces.tpl.html",
-                    controller: 'FacesCtrl'});
+        .config(function () {
+//            $urlRouterProvider.otherwise("/");
+//            $stateProvider
+//                .state("main", {
+//                    abtract: true,
+//                    url: "/main",
+//                    templateUrl: "app/main.html",
+//                    controller: 'MainCtrl'
+//                })
+//                .state("main.places", {
+//                    url: "/places",
+//                    templateUrl: "app/places/places.tpl.html",
+//                    controller: 'PlacesCtrl'});
 
         })
-
-        .controller("MainCtrl", ['$rootScope', '$scope', '$log' , '$state', '$modal', 'Restangular', '$location',
-            function ($rootScope, $scope, $log, $state, $modal, Restangular, $location) {
+        .
+        factory('mySocket', function (socketFactory) {
+            return socketFactory();
+        })
+        .controller("MainCtrl", ['$rootScope', '$scope', '$log' , '$state',  '$location',
+            function ($rootScope, $scope, $log, $state, $modal, $location) {
                 $scope.test = 'pupa';
                 $scope.navbarCollapsed = true;
                 $scope.isActive = function (viewLocation) {

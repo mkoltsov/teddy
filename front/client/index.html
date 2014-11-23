@@ -1,30 +1,145 @@
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="minimalg">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
     <title>MinimalG</title>
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="/bower_components/angular-material/themes/indigo-theme.css">
+    <link rel="stylesheet" href="/bower_components/angular-material/themes/orange-theme.css">
 </head>
 
-<body ng-app="minimalg" class="container">
+<body ng-app="minimalg">
 
-<div ui-view></div>
+<!--<div class="page-header">-->
+<!--<h2>Places i've been</h2>-->
+<!--</div>-->
+<!--<pre ng-if="false" class="code">{{model | json}}</pre>-->
+
+
+<!--<div class="row">-->
+<!--<div class="col-md-offset-4 col-md-4">-->
+<!--<div class="input-group">-->
+<!--<input type="text" class="form-control" ng-model="model.selected">-->
+<!--<span class="input-group-btn">-->
+<!--<button class="btn btn-success" ng-click="add(model.selected)" type="button">Add-->
+<!--</button>-->
+
+<!--</span>-->
+<!--</div>-->
+<!--<div class="list-group margin-top-20" ng-repeat="place in model.places">-->
+
+<!--<a href="#" class="list-group-item text-center" ng-click="selectProfile(profile.ID_PROFILE)"><h4><span-->
+<!--class="climacon" ng-class="place.icon" style="font-size: 2em;"></span> {{place.address}} {{place.temp}}</h4></a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div layout="row">-->
+<!--<div>I'm left.</div>-->
+<!--<div>I'm right.</div>-->
+<!--</div>-->
+
+<!--<div layout="column">-->
+<!--<div>I'm above.</div>-->
+<!--<div>I'm below.</div>-->
+<!--</div>-->
+<div ng-controller="PlacesCtrl">
+<md-toolbar md-theme="indigo">
+    <div class="md-toolbar-tools">
+        <span class="md-flex">Teddy v.0.1</span>
+    </div>
+</md-toolbar>
+
+<md-tabs md-selected="data.selectedIndex">
+    <md-tab id="tab1" aria-controls="tab1-content">
+        Item One
+    </md-tab>
+    <md-tab id="tab2" aria-controls="tab2-content" ng-disabled="data.secondLocked">
+        {{data.secondLabel}}
+    </md-tab>
+    <md-tab id="tab3" aria-controls="tab3-content">
+        Item Three
+    </md-tab>
+</md-tabs>
+
+<ng-switch on="data.selectedIndex" class="tabpanel-container">
+    <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
+        View for Item #1<br/>
+        data.selectedIndex = 0
+    </div>
+    <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
+        View for {{data.secondLabel}}<br/>
+        data.selectedIndex = 1
+    </div>
+    <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()">
+        View for Item #3<br/>
+        data.selectedIndex = 2
+    </div>
+</ng-switch>
+
+<div class="after-tabs-area" layout="row" layout-phone="column" layout-padding layout-align="left center">
+
+    <md-text-float type="number" label="Selected Index" ng-model="data.selectedIndex"></md-text-float>
+    <div flex></div>
+    <span>Item Two: </span>
+    <md-checkbox ng-model="data.secondLocked" aria-label="Disabled">
+        Disabled
+    </md-checkbox>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--Third parties-->
 <script type="text/javascript" src="//localhost:35729/livereload.js"></script>
-<script type="text/javascript" src="client/bower_components/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="client/bower_components/angular/angular.js"></script>
-<script type="text/javascript" src="client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script type="text/javascript" src="client/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script type="text/javascript" src="client/bower_components/restangular/dist/restangular.js"></script>
-<script type="text/javascript" src="client/bower_components/lodash/dist/lodash.js"></script>
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+<!--<script type="text/javascript" src="bower_components/angular/angular.js"></script>-->
+<!--<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>-->
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-aria.min.js"></script>
+<!--<script src="/bower_components/angular-aria/angular-aria.js"></script>-->
+<!--<script src="/bower_components/angular-animate/angular-animate.js"></script>-->
+<script src="/bower_components/hammerjs/hammer.js"></script>
+<script src="/bower_components/angular-material/angular-material.js"></script>
+
+<!--<script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>-->
+<script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
+<script type="text/javascript" src="bower_components/angular-socket-io/socket.js"></script>
  <!--Styles-->
-<link rel="stylesheet" href="lib/bootstrap.min.css">
-<link href="client/bower_components/Font-Awesome/css/font-awesome.css" rel="stylesheet">
+<!--<link rel="stylesheet" href="lib/bootstrap.min.css">-->
+
+
+
 <!--Mine-->
 <script src="dist/templates.js"></script>
 <script src="dist/minimalg.min.js"></script>
 <link href="dist/main.css" rel="stylesheet">
-
+<script src="/socket.io/socket.io.js"></script>
+<!--<script>-->
+    <!--var socket = io();-->
+<!--</script>-->
 
 </body>
 </html>

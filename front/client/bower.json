@@ -8,7 +8,9 @@
         "angular-ui-router": "~0.2.11",
         "restangular": "~1.4.0",
         "lodash": "~2.4.1-6",
-        "Font-Awesome":"4.2.0"
+        "Font-Awesome":"4.2.0",
+        "angular-socket-io":"~0.6.1",
+        "angular-material":"~0.5"
 },
     "private": true
 }
